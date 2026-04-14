@@ -1,0 +1,242 @@
+  <div id="progress-bar"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="#"><%= cb('footer.logo') %></a>
+    <ul class="nav-center">
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#experience">Expérience</a></li>
+      <li><a href="#process">Comment ça marche</a></li>
+      <li><a href="#reassurance">Références</a></li>
+    </ul>
+    <div class="nav-right">
+      <a class="nav-cta" href="#contact">Contact →</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg" id="hero-parallax"
+         <%= admin_logged_in? ? 'data-image-key="hero.bg"' : '' %>
+         <% if (url = cb_image('hero.bg')) %>
+           style="background-image: url('<%= url %>'); background-size: cover; background-position: center;"
+         <% end %>></div>
+    <div class="hero-content">
+      <span class="hero-tag"><%= cb('hero.tag') %></span>
+      <h1>
+        <span class="line-mask"><span class="line-inner"><%= cb('hero.line1') %></span></span>
+        <span class="line-mask"><span class="line-inner"><%= cb('hero.line2') %></span></span>
+        <span class="line-mask"><span class="line-inner"><%= cb('hero.line3', html: true) %></span></span>
+      </h1>
+      <div class="hero-bottom">
+        <p class="hero-desc"><%= cb('hero.desc') %></p>
+        <div class="hero-scroll">
+          <span><%= cb('hero.scroll') %></span>
+          <svg class="scroll-arrow" width="20" height="32" viewBox="0 0 20 32" fill="none">
+            <path d="M10 0v28M2 20l8 10 8-10" stroke="#888" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROFIL -->
+  <div class="cabinet" id="profil">
+    <div class="cabinet-text">
+      <span class="label"><%= cb('profil.label') %></span>
+      <h2 class="d1"><%= cb('profil.heading', html: true) %></h2>
+      <p class="d2"><%= cb('profil.para1') %></p>
+      <p class="d3"><%= cb('profil.para2') %></p>
+      <a class="link-arrow d4" href="#contact"><%= cb('profil.cta') %></a>
+    </div>
+    <div class="cabinet-image">
+      <div class="cabinet-image-inner" id="cabinet-image-inner"
+           <%= admin_logged_in? ? 'data-image-key="profil.image"' : '' %>>
+        <% if (url = cb_image('profil.image')) %>
+          <img src="<%= url %>" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" alt="Chef Eric">
+        <% else %>
+          👨‍🍳
+        <% end %>
+      </div>
+      <div class="cabinet-image-badge">
+        <div class="badge-num" id="counter-badge" data-count="<%= cb('profil.badge') %>">0</div>
+        <div class="badge-label"><%= cb('profil.badge_label') %></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CITATION -->
+  <div class="quote-section">
+    <blockquote><%= cb('quote.main') %></blockquote>
+    <p class="quote-author d2"><%= cb('quote.author') %></p>
+  </div>
+
+  <!-- EXPERTISES -->
+  <section class="section expertises" id="experience">
+    <div class="expertises-header">
+      <div>
+        <span class="label"><%= cb('exp.label') %></span>
+        <h2 class="d1"><%= cb('exp.heading', html: true) %></h2>
+      </div>
+      <a class="link-arrow d2" href="#contact"><%= cb('exp.cta') %></a>
+    </div>
+    <div class="expertises-grid" id="expertises-grid">
+      <% (1..6).each do |i| %>
+        <div class="expertise-card d<%= i %>">
+          <div class="expertise-num"><%= i.to_s.rjust(2, '0') %></div>
+          <h3><%= cb("exp.card#{i}.title", html: true) %></h3>
+          <p><%= cb("exp.card#{i}.desc") %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- DISPONIBILITÉS -->
+  <section class="section" id="disponibilites">
+    <div>
+      <span class="label"><%= cb('dispo.label') %></span>
+      <h2 class="d1"><%= cb('dispo.heading') %></h2>
+    </div>
+    <div class="schedule-grid" style="margin-top: 64px;">
+      <div class="schedule-card d1">
+        <div class="schedule-day" style="background: var(--green); color: #fff; padding: 20px; border-radius: 8px 8px 0 0; font-weight: 600;">
+          Lundi → Vendredi
+        </div>
+        <div class="schedule-details" style="background: var(--green-pale); padding: 24px; border-radius: 0 0 8px 8px;">
+          <p style="color: var(--green); font-weight: 600; margin-bottom: 8px;"><%= cb('dispo.wd.time') %></p>
+          <p style="color: var(--text); font-size: 0.9rem; line-height: 1.6;"><%= cb('dispo.wd.desc') %></p>
+        </div>
+      </div>
+      <div class="schedule-card d2">
+        <div class="schedule-day" style="background: var(--green); color: #fff; padding: 20px; border-radius: 8px 8px 0 0; font-weight: 600;">
+          Samedi, Dimanche &amp; Jours Fériés
+        </div>
+        <div class="schedule-details" style="background: var(--green-pale); padding: 24px; border-radius: 0 0 8px 8px;">
+          <p style="color: var(--green); font-weight: 600; margin-bottom: 8px;"><%= cb('dispo.we.time', html: true) %></p>
+          <p style="color: var(--text); font-size: 0.9rem; line-height: 1.6;"><%= cb('dispo.we.desc') %></p>
+        </div>
+      </div>
+    </div>
+    <div class="d3" style="margin-top: 48px; padding: 24px; background: var(--bg-warm); border-radius: 8px; border-left: 4px solid var(--green);">
+      <p style="color: var(--text); margin: 0;"><%= cb('dispo.note', html: true) %></p>
+    </div>
+  </section>
+
+  <!-- PROCESSUS -->
+  <section class="section" style="background: var(--bg-warm);" id="process">
+    <div>
+      <span class="label"><%= cb('process.label') %></span>
+      <h2 class="d1"><%= cb('process.heading', html: true) %></h2>
+    </div>
+    <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;">
+      <% (1..4).each do |i| %>
+        <div class="d<%= i %>" style="text-align: center;">
+          <div style="width: 60px; height: 60px; background: var(--green); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 1.8rem; margin: 0 auto 20px;"><%= i %></div>
+          <h4 style="font-family: var(--font-heading); font-size: 1.1rem; color: var(--black); margin-bottom: 12px;"><%= cb("process.step#{i}.title", html: true) %></h4>
+          <p style="font-size: 0.9rem; color: var(--muted); line-height: 1.6;"><%= cb("process.step#{i}.desc") %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- AVANTAGES -->
+  <section class="section" id="avantages" style="background: #fff;">
+    <div>
+      <span class="label"><%= cb('adv.label') %></span>
+      <h2 class="d1"><%= cb('adv.heading', html: true) %></h2>
+    </div>
+    <div style="margin-top: 64px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;">
+      <% (1..6).each do |i| %>
+        <div class="d<%= i %>" style="padding: 32px; background: var(--green-pale); border-radius: 8px; border-left: 4px solid var(--green);">
+          <h3 style="font-family: var(--font-heading); font-size: 1.15rem; color: var(--green); margin-bottom: 12px;"><%= cb("adv.card#{i}.title", html: true) %></h3>
+          <p style="font-size: 0.9rem; color: var(--text); line-height: 1.7;"><%= cb("adv.card#{i}.desc") %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- RÉFÉRENCES -->
+  <section class="section-sm actualites" id="reassurance">
+    <div class="actu-header">
+      <div>
+        <span class="label"><%= cb('ref.label', html: true) %></span>
+        <h2 class="d1"><%= cb('ref.heading', html: true) %></h2>
+      </div>
+    </div>
+    <div id="actu-list" class="actu-list">
+      <% (1..4).each do |i| %>
+        <div class="actu-item d<%= i %>">
+          <span class="actu-date"><%= cb("ref.item#{i}.date") %></span>
+          <div class="actu-body">
+            <span class="actu-cat"><%= cb("ref.item#{i}.cat") %></span>
+            <div class="actu-title"><%= cb("ref.item#{i}.title", html: true) %></div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-section" id="contact">
+    <div class="contact-left">
+      <span class="label"><%= cb('contact.label') %></span>
+      <h2 class="d1"><%= cb('contact.heading', html: true) %></h2>
+      <div style="height:48px"></div>
+      <div class="contact-detail d2">
+        <div class="cd-label">Téléphone</div>
+        <div class="cd-value">
+          <a href="tel:<%= cb('contact.phone').gsub(/[^\d+]/, '') %>"><%= cb('contact.phone') %></a><br />
+          <span><%= cb('contact.hours') %></span>
+        </div>
+      </div>
+      <div class="contact-detail d3">
+        <div class="cd-label">Email</div>
+        <div class="cd-value">
+          <a href="mailto:<%= cb('contact.email') %>"><%= cb('contact.email') %></a>
+        </div>
+      </div>
+      <div class="d4" style="margin-top:48px;padding-top:48px;border-top:1px solid rgba(255,255,255,0.07)">
+        <div class="cd-label" style="margin-bottom:12px"><%= cb('contact.consult') %></div>
+        <div class="cd-value" style="font-size:0.88rem;line-height:1.75"><%= cb('contact.consult_desc', html: true) %></div>
+      </div>
+    </div>
+    <div class="contact-right">
+      <span class="label"><%= cb('contact.form_label') %></span>
+      <form onsubmit="handleSubmit(event)" style="margin-top:8px">
+        <div class="form-row">
+          <div class="field d1"><label>Prénom</label><input type="text" name="prenom" placeholder="Jean" required /></div>
+          <div class="field d2"><label>Nom</label><input type="text" name="nom" placeholder="Dupont" required /></div>
+        </div>
+        <div class="field d2"><label>Email</label><input type="email" name="email" placeholder="jean@entreprise.fr" required /></div>
+        <div class="field d3"><label>Téléphone</label><input type="tel" name="telephone" placeholder="+33 6 00 00 00 00" /></div>
+        <div class="field d3">
+          <label>Type de structure</label>
+          <select name="structure" required>
+            <option value="" disabled selected>Sélectionner votre secteur</option>
+            <option>Restauration collective</option>
+            <option>Cantine scolaire</option>
+            <option>Maison de retraite</option>
+            <option>Hôpital/Clinique</option>
+            <option>Entreprise</option>
+            <option>Restauration événementielle</option>
+            <option>Autre</option>
+          </select>
+        </div>
+        <div class="field d4"><label>Votre demande</label><textarea name="message" placeholder="Décrivez votre projet, besoins et volume estimé…"></textarea></div>
+        <button type="submit" class="btn-form d5" id="submit-btn"><%= cb('contact.submit') %></button>
+      </form>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <a class="footer-logo" href="#"><%= cb('footer.logo') %></a>
+    <p class="footer-text"><%= cb('footer.copyright', html: true) %></p>
+    <div id="footer-links">
+      <a href="#"><%= cb('footer.link1', html: true) %></a>
+      <a href="#"><%= cb('footer.link2', html: true) %></a>
+      <a href="#"><%= cb('footer.link3', html: true) %></a>
+    </div>
+  </footer>
+
+  <script src="/script.js"></script>

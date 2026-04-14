@@ -1,0 +1,79 @@
+<div id="ec-toolbar">
+  <span class="ec-brand">🍽️ Administration</span>
+  <button id="ec-toggle" onclick="ecToggleEdit()">Activer l'édition</button>
+  <span id="ec-save-indicator"></span>
+  <%= link_to 'Coordonnées', admin_coordonnees_path,
+        class: "ec-nav-link #{'ec-nav-active' if controller_path == 'admin/coordonnees'}" %>
+  <%= form_with url: admin_session_path, method: :delete, style: 'margin-left:auto' do %>
+    <button type="submit" class="ec-logout">Déconnexion</button>
+  <% end %>
+</div>
+<style>
+  #ec-toolbar {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    background: #1d4d35; color: #fff;
+    padding: 0 24px; height: 48px;
+    display: flex; align-items: center; gap: 16px;
+    font-family: system-ui, sans-serif; font-size: 0.85rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .ec-brand { font-weight: 600; margin-right: 8px; }
+  #ec-toggle {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: #fff; padding: 6px 16px; border-radius: 4px;
+    cursor: pointer; font-size: 0.82rem; font-weight: 500;
+    transition: background 0.2s;
+  }
+  #ec-toggle:hover { background: rgba(255,255,255,0.25); }
+  #ec-toggle.active { background: #fff; color: #1d4d35; font-weight: 700; }
+  #ec-save-indicator {
+    font-size: 0.78rem; color: rgba(255,255,255,0.7);
+    margin-left: 4px; min-width: 80px;
+  }
+  .ec-nav-link {
+    color: rgba(255,255,255,0.65); text-decoration: none;
+    font-size: 0.82rem; padding: 5px 12px;
+    border-radius: 4px; transition: background 0.2s, color 0.2s;
+  }
+  .ec-nav-link:hover { background: rgba(255,255,255,0.12); color: #fff; }
+  .ec-nav-active { background: rgba(255,255,255,0.18) !important; color: #fff !important; }
+  .ec-logout {
+    background: none; border: none;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem; cursor: pointer;
+    transition: color 0.2s; padding: 0;
+  }
+  .ec-logout:hover { color: #fff; }
+  body { padding-top: 48px !important; }
+  /* Styles édition inline */
+  .ec-edit-mode .ec-editable {
+    outline: 2px dashed rgba(29,77,53,0.4);
+    outline-offset: 2px;
+    border-radius: 2px;
+    cursor: text;
+    transition: outline-color 0.2s;
+  }
+  .ec-edit-mode .ec-editable:hover {
+    outline-color: #1d4d35;
+    background: rgba(29,77,53,0.04);
+  }
+  .ec-edit-mode .ec-editable:focus {
+    outline: 2px solid #1d4d35;
+    background: rgba(29,77,53,0.06);
+  }
+  .ec-edit-mode [data-image-key] {
+    cursor: pointer;
+    position: relative;
+  }
+  .ec-edit-mode [data-image-key]::after {
+    content: '📷 Cliquer pour changer l\'image';
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0,0,0,0.45); color: #fff;
+    font-family: system-ui, sans-serif; font-size: 0.9rem; font-weight: 600;
+    opacity: 0; transition: opacity 0.2s; border-radius: 4px;
+  }
+  .ec-edit-mode [data-image-key]:hover::after { opacity: 1; }
+</style>
+<script src="/admin_edit.js"></script>

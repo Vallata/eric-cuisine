@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:walden-avocats.com)",
+      "Bash(rails --version)"
+    ]
+  }
+}

@@ -1,0 +1,107 @@
+<style>
+  .coord-page {
+    max-width: 640px; margin: 48px auto; padding: 0 24px;
+    font-family: system-ui, sans-serif;
+  }
+  .coord-page h1 {
+    font-size: 1.5rem; color: #1d4d35; margin-bottom: 8px;
+  }
+  .coord-page .subtitle {
+    color: #888; font-size: 0.9rem; margin-bottom: 40px;
+  }
+  .coord-section { margin-bottom: 40px; }
+  .coord-section h2 {
+    font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #aaa; margin-bottom: 16px; padding-bottom: 8px;
+    border-bottom: 1px solid #eee;
+  }
+  .coord-field { margin-bottom: 20px; }
+  .coord-field label {
+    display: block; font-size: 0.82rem; font-weight: 600;
+    color: #555; margin-bottom: 6px;
+  }
+  .coord-field input, .coord-field textarea {
+    width: 100%; padding: 10px 14px; border: 1px solid #ddd;
+    border-radius: 6px; font-size: 0.9rem; color: #1a1a1a;
+    box-sizing: border-box; transition: border-color 0.2s;
+  }
+  .coord-field input:focus, .coord-field textarea:focus {
+    outline: none; border-color: #1d4d35;
+  }
+  .coord-field .hint {
+    font-size: 0.75rem; color: #aaa; margin-top: 4px;
+  }
+  .coord-actions {
+    display: flex; gap: 12px; align-items: center;
+    margin-top: 32px; padding-top: 32px; border-top: 1px solid #eee;
+  }
+  .btn-save {
+    background: #1d4d35; color: #fff; border: none;
+    padding: 12px 28px; border-radius: 6px; font-size: 0.9rem;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-save:hover { background: #16382a; }
+  .btn-back {
+    color: #888; font-size: 0.85rem; text-decoration: none;
+  }
+  .btn-back:hover { color: #1a1a1a; }
+  .flash-notice {
+    background: #e8f5ee; border: 1px solid #b3d9c0; color: #1d4d35;
+    padding: 12px 16px; border-radius: 6px; margin-bottom: 28px;
+    font-size: 0.88rem;
+  }
+</style>
+
+<div class="coord-page">
+  <h1>Mes coordonnées</h1>
+  <p class="subtitle">Ces informations sont affichées sur le site et utilisées pour recevoir les demandes de contact.</p>
+
+  <% if flash[:notice] %>
+    <div class="flash-notice">✓ <%= flash[:notice] %></div>
+  <% end %>
+
+  <%= form_with url: admin_coordonnees_path, method: :patch do |f| %>
+    <div class="coord-section">
+      <h2>Contact</h2>
+      <div class="coord-field">
+        <label>Adresse email</label>
+        <input type="email" name="coordonnees[contact.email]" value="<%= @values['contact.email'] %>" required>
+        <p class="hint">Utilisée pour recevoir les formulaires de contact et affichée dans la section contact du site.</p>
+      </div>
+      <div class="coord-field">
+        <label>Téléphone</label>
+        <input type="text" name="coordonnees[contact.phone]" value="<%= @values['contact.phone'] %>">
+      </div>
+      <div class="coord-field">
+        <label>Horaires de disponibilité</label>
+        <input type="text" name="coordonnees[contact.hours]" value="<%= @values['contact.hours'] %>">
+        <p class="hint">Ex : Lun–Ven · 10h–20h · Réponse sous 2h</p>
+      </div>
+    </div>
+
+    <div class="coord-section">
+      <h2>Footer</h2>
+      <div class="coord-field">
+        <label>Mention copyright</label>
+        <input type="text" name="coordonnees[footer.copyright]" value="<%= @values['footer.copyright'] %>">
+      </div>
+      <div class="coord-field">
+        <label>Lien footer 1</label>
+        <input type="text" name="coordonnees[footer.link1]" value="<%= @values['footer.link1'] %>">
+      </div>
+      <div class="coord-field">
+        <label>Lien footer 2</label>
+        <input type="text" name="coordonnees[footer.link2]" value="<%= @values['footer.link2'] %>">
+      </div>
+      <div class="coord-field">
+        <label>Lien footer 3</label>
+        <input type="text" name="coordonnees[footer.link3]" value="<%= @values['footer.link3'] %>">
+      </div>
+    </div>
+
+    <div class="coord-actions">
+      <%= f.submit 'Enregistrer', class: 'btn-save' %>
+      <%= link_to '← Retour au site', root_path, class: 'btn-back' %>
+    </div>
+  <% end %>
+</div>
